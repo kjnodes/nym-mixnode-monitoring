@@ -98,6 +98,12 @@ Open the `telegraf/telegraf.env` file in a text editor and fill in the required 
 - Locate and open your mixnode profile.
 - Copy the necessary information from your mixnode profile and paste it into `telegraf.env`.
 
+Edit the environment file:
+
+```bash
+vim telegraf/telegraf.env
+```
+
 Example configuration:
 
 ```yml
