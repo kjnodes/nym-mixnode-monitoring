@@ -1,57 +1,78 @@
-version: "3"
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+
+networks:
+  nym-monitoring:
+
 services:
-  grafana:
-    image: grafana/grafana:8.5.2
-    container_name: grafana
-    restart: always
-    volumes:
-      - grafana-volume:/var/lib/grafana
-    environment:
-      - GF_AUTH_ANONYMOUS_ENABLED=true
-      - GF_SECURITY_ALLOW_EMBEDDING=true
-      - GF_USERS_ALLOW_SIGN_UP=false
-      - GF_SERVER_SERVE_FROM_SUB_PATH=true
-
-  influxdb:
-    image: influxdb
-    container_name: influxdb
-    restart: always
-    ports:
-      - 8086:8086
-      - 8089:8089/udp
-    volumes:
-      - influxdb-volume:/var/lib/influxdb
-
   prometheus:
-    image: prom/prometheus:v2.21.0
-    container_name: prometheus
+    image: prom/prometheus:latest
+    container_name: nym-prometheus
     volumes:
-      - ./prometheus/:/etc/prometheus
-      - prometheus-volume:/prometheus
+       - type: volume
+         source: prometheus_data
+         target: /prometheus
+       - type: bind
+         source: ./prometheus
+         target: /etc/prometheus
+         read_only: true 
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
-      - '--web.console.templates=/usr/share/prometheus/consoles'
-    restart: unless-stopped 
+      - '--web.enable-lifecycle'
+    ports:
+      - 9090:9090
+    networks:
+      - nym-monitoring
+    restart: unless-stopped
+
+  # default login credentials: admin/admin
+  grafana:
+    image: grafana/grafana:latest
+    env_file: ./grafana/grafana.conf
+    container_name: nym-grafana
+    volumes:
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    ports:
+      - 9999:3000
+    networks:
+      - nym-monitoring
+    restart: unless-stopped
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: nym-alertmanager
+    networks:
+      - nym-monitoring
+    ports:
+      - 9093:9093
+    volumes:
+      - type: bind
+        source: ./alertmanager
+        target: /etc/alertmanager
+        read_only: true
+    command: [
+      '--config.file=/etc/alertmanager/alertmanager.yml',
+      '--log.level=debug',
+    ]
+    restart: unless-stopped
 
   telegraf:
-    image: telegraf:1.22.3
-    container_name: telegraf
+    image: telegraf:latest
+    container_name: nym-telegraf
     volumes:
       - /:/hostfs:ro
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+    ports:
+      - 9273:9273
+    networks:
+      - nym-monitoring
     restart: unless-stopped
     env_file:
       - ./telegraf/telegraf.env
-    depends_on:
-      - influxdb
 
-        
 volumes:
   grafana-volume:
-    external: true
-  influxdb-volume:
-    external: true
   prometheus-volume:
-    external: true
