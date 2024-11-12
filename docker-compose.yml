@@ -72,7 +72,3 @@ services:
     restart: unless-stopped
     env_file:
       - ./telegraf/telegraf.env
-
-volumes:
-  grafana-volume:
-  prometheus-volume:
