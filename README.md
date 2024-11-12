@@ -38,6 +38,7 @@ Clone the repository that contains the monitoring stack configuration:
 ```bash
 rm -rf $HOME/nym-mixnode-monitoring
 git clone https://github.com/kjnodes/nym-mixnode-monitoring.git $HOME/nym-mixnode-monitoring
+cd $HOME/nym-mixnode-monitoring
 ```
 
 ## Pre-Configuration
@@ -56,7 +57,7 @@ Configure Alertmanager to send notifications via Telegram. Update the `YOUR_TELE
 Edit the configuration file:
 
 ```bash
-vim $HOME/nym-mixnode-monitoring/alertmanager/alertmanager.yml
+vim alertmanager/alertmanager.yml
 ```
 
 Example configuration:
