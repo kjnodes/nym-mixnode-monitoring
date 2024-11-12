@@ -118,7 +118,6 @@ MIXNODE_WALLET_ADDRESS="n1nlnrqdwkcpcsks4yjhzz6t4smpxnqj8m47t8n9"
 ## Monitoring stack deployment
 
 ```bash
-cd $HOME/nym-mixnode-monitoring
 docker compose up -d
 ```
 
