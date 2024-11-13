@@ -1,0 +1,299 @@
+[global_tags]
+
+[agent]
+  interval = "1m"
+  round_interval = true
+  metric_batch_size = 1000
+  metric_buffer_limit = 10000
+  collection_jitter = "0s"
+  flush_interval = "10s"
+  flush_jitter = "0s"
+  precision = "0s"
+
+  ## Run telegraf in debug mode
+  debug = false
+  ## Run telegraf in quiet mode
+  quiet = false
+  ## Override default hostname, if empty use os.Hostname()
+  hostname = "telegraf-host"
+
+[[outputs.prometheus_client]]
+  listen = "0.0.0.0:9273"
+  path = "/metrics"
+  metric_version = 2
+  expiration_interval = "1m"
+
+
+#### STATUS SERVER
+[[inputs.http]]
+    urls = ["http://${MIXNODE_PUBLIC_IP}:${MIXNODE_PORT}/stats"]
+    interval = "1m"
+    data_format = "json_v2"
+    name_suffix = "_nymcollector"
+    [inputs.http.tags]
+      mixnode = "${MIXNODE_IDENTITY_KEY}"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "received_since_startup"
+            rename = "received_since_startup"
+            type="int"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "sent_since_startup"
+            rename = "sent_since_startup"
+            type="int"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "dropped_since_startup"
+            rename = "dropped_since_startup"
+            type="int"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "received_since_last_update"
+            rename = "received_since_last_update"
+             type="int"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "sent_since_last_update"
+            rename = "sent_since_last_update"
+             type="int"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "dropped_since_last_update"
+            rename = "dropped_since_last_update"
+             type="int"
+
+
+[[inputs.http]]
+    urls = ["https://validator.nymtech.net/api/v1/status/mixnode/${MIXNODE_MIX_ID}/reward-estimation"]
+    interval = "1m"
+    data_format = "json_v2"
+    name_suffix = "_nymcollector"
+    [inputs.http.tags]
+      mixnode = "${MIXNODE_IDENTITY_KEY}"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "estimation.total_node_reward"
+            rename = "estimated_total_node_reward"
+            type = "float"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "estimation.operator"
+            rename = "estimated_operator_reward"
+            type = "float"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "estimation.delegates"
+            rename ="estimated_delegators_reward"
+            type = "float"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "reward_params.interval.reward_pool"
+            rename ="rewardparams_interval_reward_pool"
+            type = "float"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "reward_params.interval.staking_supply"
+            rename ="rewardparams_interval_staking_supply"
+            type = "float"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "reward_params.interval.staking_supply_scale_factor"
+            rename ="rewardparams_interval_staking_supply_scale_factor"
+            type = "float"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "reward_params.interval.epoch_reward_budget"
+            rename ="rewardparams_interval_epoch_reward_budget"
+            type = "float"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "reward_params.interval.sybil_resistance"
+            rename ="rewardparams_interval_sybil_resistance"
+            type = "float"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "reward_params.interval.active_set_work_factor"
+            rename ="rewardparams_interval_active_set_work_factor"
+            type = "float"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "reward_params.interval.interval_pool_emission"
+            rename ="rewardparams_interval_interval_pool_emission"
+            type = "float"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "epoch.id"
+            rename ="epoch_id"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "epoch.epochs_in_interval"
+            rename ="epoch_epochs_in_interval"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "epoch.current_epoch_start"
+            rename ="epoch_current_epoch_start"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "epoch.current_epoch_id"
+            rename ="epoch_current_epoch_id"
+
+
+
+[[inputs.http]]
+    urls = ["https://validator.nymtech.net/api/v1/status/mixnode/${MIXNODE_MIX_ID}/report"]
+    interval = "1m"
+    data_format = "json_v2"
+    name_suffix = "_nymcollector"
+    [inputs.http.tags]
+      mixnode = "${MIXNODE_IDENTITY_KEY}"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "most_recent"
+            rename = "most_recent"
+            type = "int"
+         [[inputs.http.json_v2.field]]
+            path = "last_hour"
+            rename = "last_hour"
+            type = "int"
+         [[inputs.http.json_v2.field]]
+            path = "last_day"
+            rename = "last_day"
+            type = "int"
+
+
+
+[[inputs.http]]
+    urls = ["https://validator.nymtech.net/api/v1/status/mixnode/${MIXNODE_MIX_ID}/avg_uptime"]
+    interval = "1m"
+    data_format = "json_v2"
+    name_suffix = "_nymcollector"
+    [inputs.http.tags]
+      mixnode = "${MIXNODE_IDENTITY_KEY}"
+    [[inputs.http.json_v2]]
+      [[inputs.http.json_v2.field]]
+         path = "avg_uptime"
+         rename = "node_uptime"
+
+
+[[inputs.http]]
+    urls = ["https://validator.nymtech.net/api/v1/status/mixnode/${MIXNODE_MIX_ID}/status"]
+    interval = "1m"
+    data_format = "json_v2"
+    name_suffix = "_nymcollector"
+    [inputs.http.tags]
+       mixnode = "${MIXNODE_IDENTITY_KEY}"
+    [[inputs.http.json_v2]]
+      [[inputs.http.json_v2.field]]
+        path = "status"
+        rename = "node_status"
+
+
+[[inputs.http]]
+    urls = ["https://mixnet.api.explorers.guru/api/mixnodes/${MIXNODE_IDENTITY_KEY}"]
+    interval = "1m"
+    data_format = "json_v2"
+    name_suffix = "_nymcollector"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.host"
+            rename = "mixnode_host"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.mix_port"
+            rename = "mixnode_mix_port"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.verloc_port"
+            rename = "mixnode_verloc_port"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.http_api_port"
+            rename = "mixnode_http_api_port"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.sphinx_key"
+            rename = "mixnode_sphinx_key"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.identity_key"
+            rename = "mixnode_identity_key"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.version"
+            rename = "mixnode_version"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.mix_id"
+            rename = "mixnode_mix_id"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.owner"
+            rename = "mixnode_owner"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.layer"
+            rename = "mixnode_layer"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.proxy"
+            rename = "mixnode_proxy"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.bonding_height"
+            rename = "mixnode_bonding_height"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.is_unbonding"
+            rename = "mixnode_is_unbonding"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.in_active"
+            rename = "mixnode_in_active"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.in_reserve"
+            rename = "mixnode_in_reserve"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.uptime"
+            rename = "mixnode_uptime"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.status"
+            rename = "mixnode_status"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.saturation"
+            rename = "mixnode_saturation"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.profit_margin"
+            rename = "mixnode_profit_margin"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.pledge_amount.amount"
+            rename = "mixnode_pledge_amount"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.total_delegation.amount"
+            rename = "mixnode_total_delegation"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.operating_cost.amount"
+            rename = "mixnode_operating_cost"
+    [[inputs.http.json_v2]]
+         [[inputs.http.json_v2.field]]
+            path = "mixnode.unique_delegations"
+            rename = "mixnode_unique_delegations"
+
+[[inputs.http]]
+    urls = ["https://validator.nymtech.net/api/v1/status/mixnode/${MIXNODE_MIX_ID}/stake-saturation"]
+    interval = "1m"
+    data_format = "json_v2"
+    name_suffix = "_nymcollector"
+    [[inputs.http.json_v2]]
+        [[inputs.http.json_v2.field]]
+          path = "saturation"
+          rename = "saturation"
+          type = "float"
