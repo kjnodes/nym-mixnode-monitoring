@@ -2,20 +2,12 @@ groups:
   - name: Node Monitoring
     rules:
 
-    - alert: TooFewPeers
-      expr: celestia_full_discovery_amount_of_peers < 2
-      for: 5m
-      labels:
-        severity: major
-      annotations:
-        description: 'The number of connected P2P peers has been below the defined threshold in the last 5 minutes.'
-
-    - alert: StalledBlocks
-      expr: increase(celestia_hdr_sync_subjective_head_gauge[5m]) < 5
+    - alert: DegradedUptime
+      expr: http_nymcollector_report_last_hour < 90
       labels:
         severity: critical
       annotations:
-        description: 'Block production stalled. The node has not produced any blocks in the last 5 minutes.'
+        description: 'The node uptime has declined under 90% in the last hour.'
 
     - alert: InstanceDown
       expr: up == 0
@@ -24,11 +16,3 @@ groups:
         severity: critical
       annotations:
         description: "Instance has been down for more than 1 minute."
-
-    - alert: OutOfSync
-      expr: sum by (instance)(celestia_hdr_sync_subjective_head_gauge) - sum by (instance)(celestia_hdr_store_head_height_gauge) > 2
-      for: 5m
-      labels:
-        severity: critical
-      annotations:
-        description: "Node is out of sync for more than 5 minutes."

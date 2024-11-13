@@ -22,6 +22,19 @@
   "links": [],
   "panels": [
     {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 20,
+      "panels": [],
+      "title": "Mixnode Metrics",
+      "type": "row"
+    },
+    {
       "datasource": {
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
@@ -49,9 +62,9 @@
         "h": 8,
         "w": 3,
         "x": 0,
-        "y": 0
+        "y": 1
       },
-      "id": 3,
+      "id": 19,
       "options": {
         "colorMode": "none",
         "graphMode": "none",
@@ -78,7 +91,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "http_received_since_startup{mixnode=\"$mixnode\"}",
+          "expr": "http_nymcollector_received_since_startup{mixnode=\"$mixnode\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "__auto",
@@ -154,7 +167,7 @@
         "h": 8,
         "w": 5,
         "x": 3,
-        "y": 0
+        "y": 1
       },
       "id": 1,
       "options": {
@@ -178,7 +191,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "http_received_since_startup{mixnode=\"$mixnode\"}",
+          "expr": "http_nymcollector_received_since_startup{mixnode=\"$mixnode\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "__auto",
@@ -218,7 +231,7 @@
         "h": 8,
         "w": 3,
         "x": 8,
-        "y": 0
+        "y": 1
       },
       "id": 4,
       "options": {
@@ -246,8 +259,8 @@
             "uid": "PBFA97CFB590B2093"
           },
           "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "http_sent_since_startup{mixnode=\"$mixnode\"}",
+          "editorMode": "builder",
+          "expr": "http_nymcollector_sent_since_startup{mixnode=\"$mixnode\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "__auto",
@@ -320,7 +333,7 @@
         "h": 8,
         "w": 5,
         "x": 11,
-        "y": 0
+        "y": 1
       },
       "id": 2,
       "options": {
@@ -343,8 +356,8 @@
             "uid": "PBFA97CFB590B2093"
           },
           "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "http_sent_since_startup{mixnode=\"$mixnode\"}",
+          "editorMode": "builder",
+          "expr": "http_nymcollector_sent_since_startup{mixnode=\"$mixnode\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "__auto",
@@ -384,7 +397,7 @@
         "h": 8,
         "w": 3,
         "x": 16,
-        "y": 0
+        "y": 1
       },
       "id": 5,
       "options": {
@@ -412,8 +425,8 @@
             "uid": "PBFA97CFB590B2093"
           },
           "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "http_dropped_since_startup{mixnode=\"$mixnode\"}",
+          "editorMode": "builder",
+          "expr": "http_nymcollector_dropped_since_startup{mixnode=\"$mixnode\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "__auto",
@@ -486,7 +499,7 @@
         "h": 8,
         "w": 5,
         "x": 19,
-        "y": 0
+        "y": 1
       },
       "id": 6,
       "options": {
@@ -509,8 +522,8 @@
             "uid": "PBFA97CFB590B2093"
           },
           "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "http_dropped_since_startup{mixnode=\"$mixnode\"}",
+          "editorMode": "builder",
+          "expr": "http_nymcollector_dropped_since_startup{mixnode=\"$mixnode\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "__auto",
@@ -521,6 +534,196 @@
       ],
       "title": "Packets dropped since startup",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "active": {
+                  "color": "semi-dark-green",
+                  "index": 0
+                },
+                "inactive": {
+                  "color": "semi-dark-orange",
+                  "index": 1
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "locale"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 3,
+        "x": 0,
+        "y": 9
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^value$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.3.0+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "http_nymcollector_mix_id{mixnode=\"$mixnode\"}",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "{{node_status}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Node Status",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {
+            "keepLabels": [
+              "node_status"
+            ],
+            "mode": "rows"
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "unit": "locale"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 3,
+        "x": 3,
+        "y": 9
+      },
+      "id": 18,
+      "options": {
+        "displayLabels": [],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.0+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "http_nymcollector_received_since_last_update",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "received",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "http_nymcollector_sent_since_last_update",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "sent",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "http_nymcollector_dropped_since_last_update",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "dropped",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Packets since last polling",
+      "type": "piechart"
     },
     {
       "datasource": {
@@ -580,10 +783,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
-        "w": 24,
-        "x": 0,
-        "y": 8
+        "h": 8,
+        "w": 18,
+        "x": 6,
+        "y": 9
       },
       "id": 7,
       "options": {
@@ -607,7 +810,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "http_received_since_last_update",
+          "expr": "http_nymcollector_received_since_last_update",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "received",
@@ -621,7 +824,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "http_sent_since_last_update",
+          "expr": "http_nymcollector_sent_since_last_update",
           "hide": false,
           "instant": false,
           "legendFormat": "sent",
@@ -634,7 +837,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "http_dropped_since_last_update",
+          "expr": "http_nymcollector_dropped_since_last_update",
           "hide": false,
           "instant": false,
           "legendFormat": "dropped",
@@ -655,21 +858,139 @@
           "color": {
             "mode": "thresholds"
           },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 10
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 17
+      },
+      "id": 12,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.0+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "http_nymcollector_avg_uptime{mixnode=\"$mixnode\"}",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Performance [24h]",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-orange",
+                "color": "semi-dark-red",
                 "value": null
               },
               {
+                "color": "semi-dark-orange",
+                "value": 10
+              },
+              {
                 "color": "semi-dark-yellow",
-                "value": 30
+                "value": 50
               },
               {
                 "color": "semi-dark-green",
-                "value": 50
+                "value": 90
               }
             ]
           },
@@ -680,7 +1001,7 @@
       "gridPos": {
         "h": 8,
         "w": 3,
-        "x": 0,
+        "x": 8,
         "y": 17
       },
       "id": 8,
@@ -708,7 +1029,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "http_avg_uptime{mixnode=\"$mixnode\"}",
+          "expr": "http_nymcollector_avg_uptime{mixnode=\"$mixnode\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "__auto",
@@ -717,8 +1038,133 @@
           "useBackend": false
         }
       ],
-      "title": "Uptime",
+      "title": "Performance [24h]",
       "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 13,
+        "x": 11,
+        "y": 17
+      },
+      "id": 13,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.0+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "http_nymcollector_report_last_day",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "last_day",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "http_nymcollector_report_last_hour",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "last_hour",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "http_nymcollector_report_uptime",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "now",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Uptime",
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -755,8 +1201,8 @@
       "gridPos": {
         "h": 8,
         "w": 3,
-        "x": 3,
-        "y": 17
+        "x": 0,
+        "y": 25
       },
       "id": 9,
       "options": {
@@ -783,7 +1229,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "http_stake_saturation{mixnode=\"$mixnode\"}*100",
+          "expr": "http_nymcollector_stake_saturation{mixnode=\"$mixnode\"}*100",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "__auto",
@@ -822,8 +1268,8 @@
       "gridPos": {
         "h": 8,
         "w": 3,
-        "x": 6,
-        "y": 17
+        "x": 3,
+        "y": 25
       },
       "id": 10,
       "options": {
@@ -852,7 +1298,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "round(http_total_delegation{mixnode=\"$mixnode\"}/1000000)",
+          "expr": "round(http_nymcollector_total_delegation{mixnode=\"$mixnode\"}/1000000)",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "__auto",
@@ -926,9 +1372,9 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 15,
-        "x": 9,
-        "y": 17
+        "w": 18,
+        "x": 6,
+        "y": 25
       },
       "id": 11,
       "options": {
@@ -952,7 +1398,313 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "round(http_total_delegation{mixnode=\"$mixnode\"}/1000000)",
+          "expr": "round(http_nymcollector_total_delegation{mixnode=\"$mixnode\"}/1000000)",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Total delegations",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green"
+              }
+            ]
+          },
+          "unit": "locale"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 3,
+        "x": 0,
+        "y": 33
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.3.0+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "http_nymcollector_rewards_operators{mixnode=\"$mixnode\"}/1000000",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Rewards: Operator commission",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green"
+              }
+            ]
+          },
+          "unit": "locale"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 3,
+        "x": 3,
+        "y": 33
+      },
+      "id": 15,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.3.0+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "http_nymcollector_rewards_personnal{mixnode=\"$mixnode\"}/1000000",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Rewards: Staking commission",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green"
+              }
+            ]
+          },
+          "unit": "locale"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 3,
+        "x": 6,
+        "y": 33
+      },
+      "id": 16,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.3.0+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "(http_nymcollector_rewards_operators + http_nymcollector_rewards_personnal{mixnode=\"$mixnode\"})/1000000",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Rewards: Total",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green"
+              }
+            ]
+          },
+          "unit": "locale"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 15,
+        "x": 9,
+        "y": 33
+      },
+      "id": 17,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.0+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "(http_nymcollector_rewards_operators + http_nymcollector_rewards_personnal{mixnode=\"$mixnode\"})/1000000",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "__auto",
@@ -968,7 +1720,10 @@
   "preload": false,
   "refresh": "auto",
   "schemaVersion": 40,
-  "tags": [],
+  "tags": [
+    "nym",
+    "mixnode"
+  ],
   "templating": {
     "list": [
       {
@@ -976,12 +1731,12 @@
           "text": "kjnodes.com",
           "value": "kjnodes.com"
         },
-        "definition": "label_values(http_received_since_startup,mixnode)",
+        "definition": "label_values(http_nymcollector_avg_uptime,mixnode)",
         "name": "mixnode",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(http_received_since_startup,mixnode)",
+          "query": "label_values(http_nymcollector_avg_uptime,mixnode)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -991,13 +1746,13 @@
     ]
   },
   "time": {
-    "from": "2024-11-13T00:21:05.928Z",
-    "to": "2024-11-13T02:21:05.928Z"
+    "from": "now-15m",
+    "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "New dashboard",
+  "title": "NYM Mixnode Dashboard",
   "uid": "be3rswjype7swa",
-  "version": 17,
+  "version": 57,
   "weekStart": ""
 }
