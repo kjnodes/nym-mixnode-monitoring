@@ -133,25 +133,19 @@ Follow these steps to access and use the Nym Mixnode Dashboard in Grafana:
 
 ## Dashboard contents
 
-The Grafana dashboard is organized into three main sections:
+The Grafana dashboard is organized into two main sections:
 
 ### 1. System
 
-Shows system related metrics like build info, node sync status and service uptime.
+Shows system related metrics like packets trafic, node status, daily performance and uptime.
 
 ![image](images/dashboard-system-metrics.png)
 
-### 2. Network
+### 2. Delegations and Rewards
 
-Displays peer connections.
+Displays mixnode delegation and reward metrics.
 
-![image](images/dashboard-network-metrics.png)
-
-### 3. Blockchain
-
-Displays blockchain metrics, including block time, store put metrics, shrex responses and headers metrics.
-
-![image](images/dashboard-blockchain-metrics.png)
+![image](images/dashboard-delegations-metrics.png)
 
 ## Alerting and Notifications
 
