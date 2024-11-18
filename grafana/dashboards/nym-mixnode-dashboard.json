@@ -22,68 +22,17 @@
   "links": [],
   "panels": [
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 21,
-      "options": {
-        "code": {
-          "language": "plaintext",
-          "showLineNumbers": false,
-          "showMiniMap": false
-        },
-        "content": "<div style=\"text-align: center;\">\n    <br>\n    <img src=\"https://services.kjnodes.com/assets/images/logos/nym.png\"><br><br>\n    <h1>Nym Mixnode Dashboard</h1>\n    <h5>⚡️ Powered by <a href=\"https://kjnodes.com\">kjnodes</a></h5>\n</div>",
-        "mode": "markdown"
-      },
-      "pluginVersion": "11.3.0+security-01",
-      "title": "",
-      "type": "text"
-    },
-    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 6
+        "y": 0
       },
       "id": 20,
       "panels": [],
       "title": "Mixnode Metrics",
       "type": "row"
-    },
-    {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 24,
-        "x": 0,
-        "y": 7
-      },
-      "id": 22,
-      "options": {
-        "code": {
-          "language": "plaintext",
-          "showLineNumbers": false,
-          "showMiniMap": false
-        },
-        "content": "<div style=\"text-align: center;\">\n    <br>\n    <h2>System</h2>\n</div>",
-        "mode": "markdown"
-      },
-      "pluginVersion": "11.3.0+security-01",
-      "title": "",
-      "transparent": true,
-      "type": "text"
     },
     {
       "datasource": {
@@ -113,7 +62,7 @@
         "h": 8,
         "w": 3,
         "x": 0,
-        "y": 9
+        "y": 1
       },
       "id": 19,
       "options": {
@@ -218,7 +167,7 @@
         "h": 8,
         "w": 5,
         "x": 3,
-        "y": 9
+        "y": 1
       },
       "id": 1,
       "options": {
@@ -282,7 +231,7 @@
         "h": 8,
         "w": 3,
         "x": 8,
-        "y": 9
+        "y": 1
       },
       "id": 4,
       "options": {
@@ -384,7 +333,7 @@
         "h": 8,
         "w": 5,
         "x": 11,
-        "y": 9
+        "y": 1
       },
       "id": 2,
       "options": {
@@ -448,7 +397,7 @@
         "h": 8,
         "w": 3,
         "x": 16,
-        "y": 9
+        "y": 1
       },
       "id": 5,
       "options": {
@@ -550,7 +499,7 @@
         "h": 8,
         "w": 5,
         "x": 19,
-        "y": 9
+        "y": 1
       },
       "id": 6,
       "options": {
@@ -594,100 +543,6 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "active": {
-                  "color": "semi-dark-green",
-                  "index": 0
-                },
-                "inactive": {
-                  "color": "semi-dark-orange",
-                  "index": 1
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "semi-dark-green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "locale"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 3,
-        "x": 0,
-        "y": 17
-      },
-      "id": 3,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "/^inactive value$/",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "value",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.3.0+security-01",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "http_nymcollector_mix_id{mixnode=\"$mixnode\"}",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "legendFormat": "{{node_status}}",
-          "range": true,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Node Status",
-      "transformations": [
-        {
-          "id": "labelsToFields",
-          "options": {
-            "keepLabels": [
-              "node_status"
-            ],
-            "mode": "rows"
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
             "mode": "palette-classic"
           },
           "custom": {
@@ -704,9 +559,9 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 3,
-        "x": 3,
-        "y": 17
+        "w": 6,
+        "x": 0,
+        "y": 9
       },
       "id": 18,
       "options": {
@@ -837,7 +692,7 @@
         "h": 8,
         "w": 18,
         "x": 6,
-        "y": 17
+        "y": 9
       },
       "id": 7,
       "options": {
@@ -977,7 +832,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 25
+        "y": 17
       },
       "id": 12,
       "options": {
@@ -1053,7 +908,7 @@
         "h": 8,
         "w": 3,
         "x": 8,
-        "y": 25
+        "y": 17
       },
       "id": 8,
       "options": {
@@ -1155,7 +1010,7 @@
         "h": 8,
         "w": 13,
         "x": 11,
-        "y": 25
+        "y": 17
       },
       "id": 13,
       "options": {
@@ -1218,32 +1073,6 @@
       "type": "timeseries"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 24,
-        "x": 0,
-        "y": 33
-      },
-      "id": 23,
-      "options": {
-        "code": {
-          "language": "plaintext",
-          "showLineNumbers": false,
-          "showMiniMap": false
-        },
-        "content": "<div style=\"text-align: center;\">\n    <br>\n    <h2>Delegations and Rewards</h2>\n</div>",
-        "mode": "markdown"
-      },
-      "pluginVersion": "11.3.0+security-01",
-      "title": "",
-      "transparent": true,
-      "type": "text"
-    },
-    {
       "datasource": {
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
@@ -1279,7 +1108,7 @@
         "h": 8,
         "w": 3,
         "x": 0,
-        "y": 35
+        "y": 25
       },
       "id": 9,
       "options": {
@@ -1346,7 +1175,7 @@
         "h": 8,
         "w": 3,
         "x": 3,
-        "y": 35
+        "y": 25
       },
       "id": 10,
       "options": {
@@ -1451,7 +1280,7 @@
         "h": 8,
         "w": 18,
         "x": 6,
-        "y": 35
+        "y": 25
       },
       "id": 11,
       "options": {
@@ -1516,7 +1345,7 @@
         "h": 8,
         "w": 3,
         "x": 0,
-        "y": 43
+        "y": 33
       },
       "id": 14,
       "options": {
@@ -1586,7 +1415,7 @@
         "h": 8,
         "w": 3,
         "x": 3,
-        "y": 43
+        "y": 33
       },
       "id": 15,
       "options": {
@@ -1656,7 +1485,7 @@
         "h": 8,
         "w": 3,
         "x": 6,
-        "y": 43
+        "y": 33
       },
       "id": 16,
       "options": {
@@ -1761,7 +1590,7 @@
         "h": 8,
         "w": 15,
         "x": 9,
-        "y": 43
+        "y": 33
       },
       "id": 17,
       "options": {
@@ -1794,7 +1623,7 @@
           "useBackend": false
         }
       ],
-      "title": "Rewards: Total",
+      "title": "Total delegations",
       "type": "timeseries"
     }
   ],
