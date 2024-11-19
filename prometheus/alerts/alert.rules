@@ -16,3 +16,24 @@ groups:
         severity: critical
       annotations:
         description: "Instance has been down for more than 1 minute."
+
+    - alert: NodeInactive
+      expr: http_nymcollector_received_since_last_update < 1000
+      labels:
+        severity: minor
+      annotations:
+        description: 'The node is inactive.'
+
+    - alert: NoPacketsMixed
+      expr: increase(http_nymcollector_received_since_startup{mixnode="$mixnode"}[1m]) == 0
+      labels:
+        severity: minor
+      annotations:
+        description: 'The node has not mixed any packets in last one minute.'
+
+    - alert: DegradedUptime
+      expr: http_nymcollector_report_last_hour < 90
+      labels:
+        severity: critical
+      annotations:
+        description: 'The node uptime has declined under 90% in the last hour.'
