@@ -25,11 +25,11 @@ groups:
         description: 'The node is inactive.'
 
     - alert: NoPacketsMixed
-      expr: increase(http_nymcollector_received_since_startup[5m]) == 0
+      expr: increase(http_nymcollector_received_since_startup[10m]) == 0
       labels:
         severity: critical
       annotations:
-        description: 'The node has not mixed any packets in last one minute.'
+        description: 'The node has not mixed any packets in last 10 minutes.'
 
     - alert: DegradedUptime
       expr: http_nymcollector_report_last_hour < 90
