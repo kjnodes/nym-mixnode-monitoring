@@ -25,9 +25,9 @@ groups:
         description: 'The node is inactive.'
 
     - alert: NoPacketsMixed
-      expr: increase(http_nymcollector_received_since_startup{mixnode="$mixnode"}[1m]) == 0
+      expr: increase(http_nymcollector_received_since_startup[5m]) == 0
       labels:
-        severity: minor
+        severity: critical
       annotations:
         description: 'The node has not mixed any packets in last one minute.'
 
