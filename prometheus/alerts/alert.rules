@@ -18,7 +18,7 @@ groups:
         description: "Instance has been down for more than 1 minute."
 
     - alert: NodeInactive
-      expr: http_nymcollector_received_since_last_update < 1000
+      expr: rate(http_nymcollector_received_since_last_update[10m]) > 15
       labels:
         severity: minor
       annotations:
