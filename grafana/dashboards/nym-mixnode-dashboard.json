@@ -261,7 +261,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "scalar(rate(http_nymcollector_received_since_last_update{mixnode=\"$mixnode\"}[10m])) > bool 15",
+          "expr": "scalar(rate(http_nymcollector_received_since_last_update{mixnode=\"$mixnode\"}[10m])) > bool 5",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "received",
@@ -1455,8 +1455,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "semi-dark-red",
-                    "value": null
+                    "color": "semi-dark-red"
                   },
                   {
                     "color": "semi-dark-orange",
@@ -1531,8 +1530,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "semi-dark-red",
-                    "value": null
+                    "color": "semi-dark-red"
                   },
                   {
                     "color": "semi-dark-orange",
@@ -1644,8 +1642,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "semi-dark-green",
-                    "value": null
+                    "color": "semi-dark-green"
                   }
                 ]
               },
@@ -1734,8 +1731,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "semi-dark-green",
-                    "value": null
+                    "color": "semi-dark-green"
                   },
                   {
                     "color": "semi-dark-orange",
@@ -1809,8 +1805,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "semi-dark-green",
-                    "value": null
+                    "color": "semi-dark-green"
                   }
                 ]
               },
@@ -1913,8 +1908,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "semi-dark-green",
-                    "value": null
+                    "color": "semi-dark-green"
                   }
                 ]
               },
